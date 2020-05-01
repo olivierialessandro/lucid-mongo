@@ -18,6 +18,7 @@ const mongoUriBuilder = require('mongo-uri-builder')
 const mongoUrl = require('mongodb-url')
 // const debug = require('debug')('mquery')
 
+
 const proxyHandler = {
   get (target, name) {
     if (typeof (name) === 'symbol' || name === 'inspect') {
