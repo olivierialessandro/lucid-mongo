@@ -663,32 +663,93 @@ class Model extends BaseModel {
     this._setCreatedAt(this.$attributes)
     this._setUpdatedAt(this.$attributes)
     const attributes = this._formatFields(_.cloneDeep(this.$attributes))
-    const result = await this.constructor
-      .query()
-      .insert(attributes)
+    if (Array.isArray(attributes)) {
+      if (attributes.length > 1) {
+        for (let e in attributes) {
+          const result = await this.constructor
+            .query()
+            .insert(attributes[e])
 
 
-    /**
-     * Only set the primary key value when incrementing is
-     * set to true on model
-     */
-    if (this.constructor.incrementing) {
-      this.primaryKeyValue = result.insertedIds[0]
+          /**
+           * Only set the primary key value when incrementing is
+           * set to true on model
+           */
+          if (this.constructor.incrementing) {
+            this.primaryKeyValue = result.insertedIds[0]
+          }
+
+          this.$persisted = true
+
+          /**
+           * Keep a clone copy of saved attributes, so that we can find
+           * a diff later when calling the update query.
+           */
+          this._syncOriginals()
+
+          /**
+           * Executing after hooks
+           */
+        }
+        await this.constructor.$hooks.after.exec('create', this)
+        return true
+      } else {
+        const result = await this.constructor
+          .query()
+          .insert(attributes)
+
+
+        /**
+         * Only set the primary key value when incrementing is
+         * set to true on model
+         */
+        if (this.constructor.incrementing) {
+          this.primaryKeyValue = result.insertedIds[0]
+        }
+
+        this.$persisted = true
+
+        /**
+         * Keep a clone copy of saved attributes, so that we can find
+         * a diff later when calling the update query.
+         */
+        this._syncOriginals()
+
+        /**
+         * Executing after hooks
+         */
+        await this.constructor.$hooks.after.exec('create', this)
+        return true
+      }
+    } else {
+      const result = await this.constructor
+        .query()
+        .insert(attributes)
+
+
+      /**
+       * Only set the primary key value when incrementing is
+       * set to true on model
+       */
+      if (this.constructor.incrementing) {
+        this.primaryKeyValue = result.insertedIds[0]
+      }
+
+      this.$persisted = true
+
+      /**
+       * Keep a clone copy of saved attributes, so that we can find
+       * a diff later when calling the update query.
+       */
+      this._syncOriginals()
+
+      /**
+       * Executing after hooks
+       */
+      await this.constructor.$hooks.after.exec('create', this)
+      return true
     }
 
-    this.$persisted = true
-
-    /**
-     * Keep a clone copy of saved attributes, so that we can find
-     * a diff later when calling the update query.
-     */
-    this._syncOriginals()
-
-    /**
-     * Executing after hooks
-     */
-    await this.constructor.$hooks.after.exec('create', this)
-    return true
   }
 
   /**
