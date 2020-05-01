@@ -447,11 +447,7 @@ class Database {
   async insert (row) {
     const connection = await this.connect()
     const collection = connection.collection(this.collectionName)
-    if (row.length === 1) {
-      return collection.insertOne(row)
-    } else {
-      return collection.insertMany(row)
-    }
+    return collection.insert(row)
   }
 
   async insertOne (row) {
