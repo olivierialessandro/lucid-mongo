@@ -447,8 +447,11 @@ class Database {
   async insert (row) {
     const connection = await this.connect()
     const collection = connection.collection(this.collectionName)
-    console.log('vedo dati row', row)
-    return collection.insert(row)
+    if (row.length === 1) {
+      return collection.insertOne(row)
+    } else {
+      return collection.insertMany(row)
+    }
   }
 
   async insertOne (row) {
