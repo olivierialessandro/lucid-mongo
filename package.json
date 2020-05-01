@@ -22,7 +22,8 @@
     "mongo",
     "mongodb",
     "orm",
-    "odm"
+    "odm",
+    "alessandro olivieri"
   ],
   "standard": {
     "global": [
@@ -36,7 +37,7 @@
       "beforeEach"
     ]
   },
-  "author": "LuongND",
+  "author": "Alessandro Olivieri",
   "license": "MIT",
   "dependencies": {
     "@adonisjs/generic-exceptions": "^3.0.1",
