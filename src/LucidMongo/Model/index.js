@@ -663,15 +663,10 @@ class Model extends BaseModel {
     this._setCreatedAt(this.$attributes)
     this._setUpdatedAt(this.$attributes)
     const attributes = this._formatFields(_.cloneDeep(this.$attributes))
-    if (attributes.length > 1) {
-      const result = await this.constructor
-        .query()
-        .insertMany(attributes)
-    } else {
-      const result = await this.constructor
-        .query()
-        .insertOne(attributes)
-    }
+    const result = await this.constructor
+      .query()
+      .insert(attributes)
+
 
     /**
      * Only set the primary key value when incrementing is
