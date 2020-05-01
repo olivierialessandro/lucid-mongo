@@ -1,5 +1,5 @@
 {
-  "name": "lucid-mongo",
+  "name": "alessandroolivieri-lucid-mongo",
   "description": "A Mongodb ODM",
   "main": "index.js",
   "version": "3.1.6",
@@ -81,7 +81,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/duyluonglc/lucid-mongo.git"
+    "url": "git+https://github.com/duyluonglc/lucid-mongo.git"
   },
-  "snyk": true
+  "snyk": true,
+  "bugs": {
+    "url": "https://github.com/duyluonglc/lucid-mongo/issues"
+  },
+  "homepage": "https://github.com/duyluonglc/lucid-mongo#readme",
+  "bin": {
+    "alessandroolivieri-lucid-mongo": "index.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }

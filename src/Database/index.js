@@ -447,7 +447,20 @@ class Database {
   async insert (row) {
     const connection = await this.connect()
     const collection = connection.collection(this.collectionName)
+    console.log('vedo dati row', row)
     return collection.insert(row)
+  }
+
+  async insertOne (row) {
+    const connection = await this.connect()
+    const collection = connection.collection(this.collectionName)
+    return collection.insertOne(row)
+  }
+
+  async insertMany (row) {
+    const connection = await this.connect()
+    const collection = connection.collection(this.collectionName)
+    return collection.insertMany(row)
   }
 
   /**
