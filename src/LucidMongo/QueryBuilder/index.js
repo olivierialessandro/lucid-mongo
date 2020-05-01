@@ -450,7 +450,11 @@ class QueryBuilder {
     const collection = await this.db.getCollection(this.collection)
     //return collection.insert(attributes)
     if (Array.isArray(collection)) {
-      return collection.insertMany(attributes)
+      if (collection.length > 1) {
+        return collection.insertMany(attributes)
+      } else {
+        return collection.insertOne(attributes)
+      }
     } else {
       return collection.insertOne(attributes)
     }

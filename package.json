@@ -2,7 +2,7 @@
   "name": "alessandroolivieri-lucid-mongo",
   "description": "A Mongodb ODM",
   "main": "index.js",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "scripts": {
     "lint": "standard",
     "fix": "standard --fix",
